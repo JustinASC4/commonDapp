@@ -3,18 +3,21 @@ import Application from './Application';
 import Universities from './Universities';
 
 class ApplicationPage extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-      return(
-        <div>Page
-          <Application />
-          <Universities />
-        </div>
-      );
-    }
+  render() {
+    return(
+      <section id='container'>Page
+        <Application />
+        <Universities />
+      </section>
+    );
+  }
 }
 
 export default ApplicationPage;
+
+
+
