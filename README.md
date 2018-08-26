@@ -1,4 +1,4 @@
-# **CommonÐapp**
+# **Common Ðapp**
 A web 3.0 application for reducing college application fees for students.
 
 ## **Project Design & Purpose** 
