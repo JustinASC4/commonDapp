@@ -21,9 +21,9 @@ class Universities extends Component {
         <div className='university-list'>
           {universities.map((university, idx) => {
             return(
-              <div className='uni-divs'>
+              <div key={idx} className='uni-divs'>
                 <span>{university}</span>
-                <button value={university} onClick={updateUniversities}>Add School</button>
+                <button id={university} value={university} onClick={updateUniversities}>Add School</button>
               </div>
             );
           })}
