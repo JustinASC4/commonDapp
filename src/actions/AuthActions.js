@@ -105,11 +105,13 @@ export const authenticate = () => async dispatch => {
   }
 
   const linnia = new Linnia(web3, ipfs, { hubAddress });
+  /*
   encryptUploadData(
     `{“name”: “Joseph”, “none”: ''}`,
     "0xf4e1f2a315b6e0de0f7a75d101827649d02fae8afd14643d3db23bf7a030fe2a44c9fc07ee39df8ef037144954bcb69e6b26f99d86c92d3dc699a0dd8525f79e",
     "jkm_dummy_5"
   );
+  */
 
   /*
     Success! Our user is ready to start interacting with the Linnia Protocol. We add the
