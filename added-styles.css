@@ -71,5 +71,8 @@ input:focus {
 }
 
 select {
-	width: 150px;
+	margin-top: 20px;
+	width: 300px;
+	font-family: 'Open Sans', serif;
+	background: transparent;
 }

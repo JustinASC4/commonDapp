@@ -1,15 +1,16 @@
-import Web3 from 'web3';
-import IPFS from 'ipfs-mini';
-import Linnia from '@linniaprotocol/linnia-js';
-import config from '../config';
+import Web3 from "web3";
+import IPFS from "ipfs-mini";
+import Linnia from "@linniaprotocol/linnia-js";
+import config from "../config";
+import uploadData from "./StudentActions";
 
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_FAILURE = 'AUTH_FAILURE';
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAILURE = "AUTH_FAILURE";
 
-export const NO_METAMASK = 'NO_METAMASK';
-export const LOCKED_METAMASK = 'LOCKED_METAMASK';
-export const LINNIA_MISCONFIGURED = 'LINNIA_MISCONFIGURED';
-export const IPFS_MISCONFIGURED = 'IPFS_MISCONFIGURED';
+export const NO_METAMASK = "NO_METAMASK";
+export const LOCKED_METAMASK = "LOCKED_METAMASK";
+export const LINNIA_MISCONFIGURED = "LINNIA_MISCONFIGURED";
+export const IPFS_MISCONFIGURED = "IPFS_MISCONFIGURED";
 
 const hubAddress = config.LINNIA_HUB_ADDRESS;
 const protocol = config.LINNIA_IPFS_PROTOCOL;
@@ -20,22 +21,21 @@ const authSuccess = (web3, ipfs, linnia) => ({
   type: AUTH_SUCCESS,
   web3,
   ipfs,
-  linnia,
+  linnia
 });
 
 const authFailure = authError => ({
   type: AUTH_FAILURE,
   isAuthenticated: false,
-  authError,
+  authError
 });
-
 
 const getWeb3 = () => {
   return new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
-    window.addEventListener('load', async dispatch => {
+    window.addEventListener("load", async dispatch => {
       // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-      if (typeof window.web3 !== 'undefined') {
+      if (typeof window.web3 !== "undefined") {
         // Use Mist/MetaMask's provider.
         resolve(new Web3(window.web3.currentProvider));
       } else {
@@ -54,7 +54,6 @@ const getWeb3 = () => {
 
 export const authenticate = () => async dispatch => {
   let web3;
-
   /*
     First, we check to see that web3 has been injected into the browser window. This will most likely
     be done by the MetaMask browser extension, but could be another extension or browser.
@@ -75,7 +74,7 @@ export const authenticate = () => async dispatch => {
   const address = accounts[0];
 
   if (!address) {
-    console.error('Metamask is locked!');
+    console.error("Metamask is locked!");
     return dispatch(authFailure(LOCKED_METAMASK));
   }
 
@@ -89,7 +88,7 @@ export const authenticate = () => async dispatch => {
   try {
     //TODO Ping IPFS to check connection
   } catch (e) {
-    console.error('IPFS is not configured correctly!');
+    console.error("IPFS is not configured correctly!");
     return dispatch(authFailure(IPFS_MISCONFIGURED));
   }
 
@@ -100,12 +99,16 @@ export const authenticate = () => async dispatch => {
   */
 
   const code = await web3.eth.getCode(hubAddress);
-  if (!code || code === '0x0' || code === '0x') {
-    console.error('Linnia is not configured correctly!');
+  if (!code || code === "0x0" || code === "0x") {
+    console.error("Linnia is not configured correctly!");
     return dispatch(authFailure(LINNIA_MISCONFIGURED));
   }
 
   const linnia = new Linnia(web3, ipfs, { hubAddress });
+  encryptUploadData(
+    "{name: 'joseph' , id: 100}",
+    "0xf4e1f2a315b6e0de0f7a75d101827649d02fae8afd14643d3db23bf7a030fe2a44c9fc07ee39df8ef037144954bcb69e6b26f99d86c92d3dc699a0dd8525f79e"
+  );
 
   /*
     Success! Our user is ready to start interacting with the Linnia Protocol. We add the
