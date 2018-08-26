@@ -29,35 +29,30 @@ const encryptUploadData = async (student_data, public_key, metadata) => {
   });
 
   // encrypt public_key and content
+  console.log("Encrypting data");
   const encrypted = await encrypt(public_key, student_data);
 
   //Upload to IPFS
   let dataUri;
-  //let ipfsHash = await ipfs.add(encrypted);
+  console.log("Uploading to IPFS");
   dataUri = await new Promise((resolve, reject) => {
     ipfs.add(encrypted, (err, ipfsRed) => {
       err ? reject(err) : resolve(ipfsRed);
     });
   });
-  console.log(dataUri);
-  //let dataUri = "QmbVYMg4V5GcB7Jxpx1XSGyHZApN5oDGbTGcKLgNyRQ8Hp";
-  //console.log(ipfsHash);
-  // add the IPFS has to records
+  //console.log(dataUri);
   const { records } = await linnia.getContractInstances();
-  // hash of the plain file plus nonce
-  // student_data["nonce"] = crypto.randomBytes(256).toString("hex");
 
   const hash = linnia.web3.utils.sha3(JSON.stringify(student_data));
   const [owner] = await store.getState().auth.web3.eth.getAccounts();
 
   //Upload file to Linnia
-
+  console.log("Making a record entry on the BlockChain");
   const uploadRecords = await records.addRecord(hash, metadata, dataUri, {
     from: owner,
     gas: 500000,
     gasPrice: 20000000000
   });
-
   return uploadRecords;
 };
 
