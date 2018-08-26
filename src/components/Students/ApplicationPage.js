@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Application from './Application';
-import Universities from './Universities';
 
 class ApplicationPage extends Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class ApplicationPage extends Component {
     return(
       <section id='container'>Page
         <Application />
-        <Universities />
       </section>
     );
   }

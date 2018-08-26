@@ -108,13 +108,15 @@ select {
 .uni-divs {
   background: #f3f5f7;
   border-radius: 5px;
-/    *border: 1px solid black;*/
-  display: flex;
+/* border: 1px solid black; */
   padding: 10px 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; 
   justify-content: space-between;
   margin: 15px;
-  height: 30px;
-  line-height: 30px;
   box-shadow: 0 0.05em 0.05em -0.0125em rgba(0,0,0,.25), 0 0.05em 0.25em rgba(0,0,0,.5);
 }
 
@@ -153,4 +155,95 @@ button:focus {
   background-color: #fff;
   color: #900c3f;
   border: solid #900c3f;
+}
+
+#student-info, #applied-institutions {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 .25em .25em -.125em rgba(0,0,0,.25), 0 .5em 1.25em rgba(0,0,0,.5);
+  width: 500px;
+  height: 400px;
+  margin: 50px auto;
+}
+
+.apply-btn {
+    background-color: #900c3f;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Open Sans', serif;
+    font-size: 1em;
+    margin-right: 15px;
+    width: 75px;
+    transition: .03s;
+}
+
+.apply-btn:active {
+    outline: none;
+    background-color: #fff;
+    color: #900c3f;
+    border: solid #900c3f;
+}
+
+.apply-btn:hover {
+    outline: none;
+}
+
+.apply-btn:focus {
+    outline: none;
+    background-color: #fff;
+    color: #900c3f;
+    border: solid #900c3f;
+}
+
+form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+/* border: 1px solid red; */
+}
+
+/* Name and GPA Fields */
+input {
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid #900c3f;
+  line-height: 40px;
+  width: 300px;
+}
+
+input:active {
+outline: none;
+}
+
+input:focus {
+outline: none;
+}
+
+/* Financial Status Dropdown */
+select {
+  margin-top: 20px;
+  width: 300px;
+  font-family: 'Open Sans', serif;
+  background: transparent;
+}
+
+#document-upload {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  bottom: 10px;
+}
+
+figcaption {
+   color: #900c3f;
+   font-family: 'Open Sans', serif;
+   font-size: .9em;
+   padding-bottom: 10px;
+       text-align: center;
+}
+
+.pdf {
+   height: 75px;
 }
