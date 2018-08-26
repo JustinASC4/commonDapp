@@ -1,5 +1,6 @@
 import { encrypt } from "../utils";
 import store from "../store";
+import crypto from "crypto";
 const Web3 = require("web3");
 const Linnia = require("@linniaprotocol/linnia-js");
 const IPFS = require("ipfs-mini");
@@ -34,6 +35,27 @@ const encryptUploadData = async (student_data, public_key) => {
           console.log(err, result);
         });
   });
+
+  // add the IPFS has to records
+  const { records } = await linnia.getContractInstances();
+  // hash of the plain file plus nonce
+  student_data.nonce = crypto.randomBytes(256).toString("hex");
+
+  const hash = linnia.web3.utils.sha3(JSON.stringify(student_data));
+  const [owner] = await store.getState().auth.web3.eth.getAccounts();
+
+  //Upload file to Linnia
+  try {
+    await records.addRecord(hash, metadata, dataUri, {
+      from: owner,
+      gas: 500000,
+      gasPrice: 20000000000
+    });
+  } catch (e) {
+    dispatch(uploadError("Unable to upload file to Linnia"));
+    return;
+  }
+
   // return the IPFS hash
 
   // cat - fetch  info from IPFS
