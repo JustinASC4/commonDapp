@@ -61,7 +61,7 @@ const encryptUploadData = async (student_data, public_key) => {
   // cat - fetch  info from IPFS
 };
 
-export default uploadData;
+export default encryptUploadData;
 
 // WEBPACK FOOTER //
 // src/actions/StudentActions.js

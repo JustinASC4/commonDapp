@@ -2,7 +2,7 @@ import Web3 from "web3";
 import IPFS from "ipfs-mini";
 import Linnia from "@linniaprotocol/linnia-js";
 import config from "../config";
-import uploadData from "./StudentActions";
+import encryptUploadData from "./StudentActions";
 
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAILURE = "AUTH_FAILURE";
