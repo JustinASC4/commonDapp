@@ -9,7 +9,7 @@ As it stands, most North American colleges request a fee from students in order 
 
 The Common Ðapp allows users to upload their college application data to IPFS and grant view permission to each school that they choose to apply to.
 
-Schools will now have more data to strengthen their machine learning algorithms, lower their acceptance rates, and 
+Schools will now have more data to strengthen their machine learning algorithms and lower their acceptance rates. This is an incentive loop that both parties can benefit from. 
 
 ## **Set up**
 This application requires the use of Metamask, a web-based portal into the Ethereum blockchain. It allows a user to interact with Web3 (decentralized) applications. 
