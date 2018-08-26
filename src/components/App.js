@@ -13,6 +13,7 @@ import Header from './Header';
 import GetRecord from './../containers/GetRecordContainer';
 import Search from './../containers/SearchContainer';
 import Permission from './../containers/PermissionsContainer';
+import Student from './../containers/StudentContainer';
 
 const history = createHistory({
   basename: '',
@@ -56,6 +57,12 @@ class App extends Component {
                 path='/permissions'
                 authError={authError}
                 component={Permission}
+              />
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                path='/application'
+                authError={authError} 
+                component={Student}
               />
               <Route
                 exact

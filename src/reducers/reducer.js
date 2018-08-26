@@ -4,6 +4,7 @@ import authReducer from './authReducer';
 import recordReducer from './recordReducer';
 import searchReducer from './searchReducer';
 import permissionsReducer from './permissionsReducer';
+import studentsReducer from './studentsReducer';
 
 const reducer = combineReducers({
   routing: routerReducer,
@@ -11,6 +12,7 @@ const reducer = combineReducers({
   record: recordReducer,
   permissions: permissionsReducer,
   search: searchReducer,
+  application: studentsReducer,
 });
 
 export default reducer;

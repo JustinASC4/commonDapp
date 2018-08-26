@@ -71,6 +71,14 @@ class Header extends Component {
             }}
           />
         </Toolbar>
+        <Tab
+          label='Core Application'
+          onClick={this.navigateTo('/application')}
+          classes={{
+            root: `${classes.tab}`,
+            labelContainer: classes.tabLabelContainer,
+          }}
+        />
       </AppBar>
     );
   }
