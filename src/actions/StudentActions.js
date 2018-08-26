@@ -42,8 +42,11 @@ const encryptUploadData = async (student_data, public_key, metadata) => {
   });
   //console.log(dataUri);
   const { records } = await linnia.getContractInstances();
-
-  const hash = linnia.web3.utils.sha3(JSON.stringify(student_data));
+  const student_data_2 = `{“name”: “Joseph”, “none”: ${crypto
+    .randomBytes(256)
+    .toString("hex")}}`;
+  //student_data["nonce"] = crypto.randomBytes(256).toString("hex");
+  const hash = linnia.web3.utils.sha3(JSON.stringify(student_data_2));
   const [owner] = await store.getState().auth.web3.eth.getAccounts();
 
   //Upload file to Linnia
