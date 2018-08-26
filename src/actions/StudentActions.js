@@ -5,9 +5,16 @@ const Web3 = require("web3");
 const Linnia = require("@linniaprotocol/linnia-js");
 const IPFS = require("ipfs-mini");
 
+export const LOAD_APP = "LOAD_APP";
+
+export const sendAppData = data => ({
+  type: LOAD_APP,
+  payload: data
+});
+
 // upload input data (JSON) to IPFS and make an entry on the blockchain
 // use linnia js to keep track of users and their records
-const encryptUploadData = async (student_data, public_key) => {
+const encryptUploadData = async (student_data, public_key, metadata) => {
   //const linnia = store.getState().auth.linnia;
   //const ipfs = linnia.ipfs;
   const ipfs = new IPFS({
@@ -23,42 +30,35 @@ const encryptUploadData = async (student_data, public_key) => {
 
   // encrypt public_key and content
   const encrypted = await encrypt(public_key, student_data);
-  console.log("Encryption done");
-  console.log(public_key);
-  //console.log(encrypted);
 
   //Upload to IPFS
-  ipfs.add(encrypted, (err, ipfsRed) => {
-    err
-      ? console.log(err)
-      : ipfs.cat(ipfsRed, (err, result) => {
-          console.log(err, result);
-        });
+  let dataUri;
+  //let ipfsHash = await ipfs.add(encrypted);
+  dataUri = await new Promise((resolve, reject) => {
+    ipfs.add(encrypted, (err, ipfsRed) => {
+      err ? reject(err) : resolve(ipfsRed);
+    });
   });
-
+  console.log(dataUri);
+  //let dataUri = "QmbVYMg4V5GcB7Jxpx1XSGyHZApN5oDGbTGcKLgNyRQ8Hp";
+  //console.log(ipfsHash);
   // add the IPFS has to records
   const { records } = await linnia.getContractInstances();
   // hash of the plain file plus nonce
-  student_data.nonce = crypto.randomBytes(256).toString("hex");
+  // student_data["nonce"] = crypto.randomBytes(256).toString("hex");
 
   const hash = linnia.web3.utils.sha3(JSON.stringify(student_data));
   const [owner] = await store.getState().auth.web3.eth.getAccounts();
 
   //Upload file to Linnia
-  try {
-    await records.addRecord(hash, metadata, dataUri, {
-      from: owner,
-      gas: 500000,
-      gasPrice: 20000000000
-    });
-  } catch (e) {
-    dispatch(uploadError("Unable to upload file to Linnia"));
-    return;
-  }
 
-  // return the IPFS hash
+  const uploadRecords = await records.addRecord(hash, metadata, dataUri, {
+    from: owner,
+    gas: 500000,
+    gasPrice: 20000000000
+  });
 
-  // cat - fetch  info from IPFS
+  return uploadRecords;
 };
 
 export default encryptUploadData;
