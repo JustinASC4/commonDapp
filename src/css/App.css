@@ -70,7 +70,6 @@ h2 {
 form {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid red;
 }
 
 input {
@@ -228,12 +227,10 @@ select {
   font-family: 'Open Sans', serif;
   background: transparent;
 }
-
-#document-upload {
+figure {
+  display: inline-block;
   position: relative;
-  display: flex;
-  justify-content: center;
-  bottom: 10px;
+  left: 100px;
 }
 
 figcaption {

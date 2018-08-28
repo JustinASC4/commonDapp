@@ -69,9 +69,7 @@ class Application extends Component {
               <option value='> 100,000'>&gt; 100,000</option>
             </select>
           </form>
-        </div>
-        <h2>Document Upload</h2>
-        <div id='document-upload'>
+          <h2>Document Upload</h2>
           <figure>
             <figcaption>Fafsa</figcaption>
             <img src='https://image.flaticon.com/icons/svg/179/179483.svg' alt='' className='pdf' />

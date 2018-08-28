@@ -42,24 +42,6 @@ class App extends Component {
             <Switch>
               <ProtectedRoute
                 isAuthenticated={isAuthenticated}
-                path='/get_record'
-                authError={authError}
-                component={GetRecord}
-              />
-              <ProtectedRoute
-                isAuthenticated={isAuthenticated}
-                path='/search'
-                authError={authError}
-                component={Search}
-              />
-              <ProtectedRoute
-                isAuthenticated={isAuthenticated}
-                path='/permissions'
-                authError={authError}
-                component={Permission}
-              />
-              <ProtectedRoute
-                isAuthenticated={isAuthenticated}
                 path='/application'
                 authError={authError} 
                 component={Student}

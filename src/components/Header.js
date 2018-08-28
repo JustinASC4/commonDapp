@@ -47,38 +47,14 @@ class Header extends Component {
             }}
           />
           <Tab
-            label='Records'
-            onClick={this.navigateTo('/get_record')}
-            classes={{
-              root: `${classes.tab}`,
-              labelContainer: classes.tabLabelContainer,
-            }}
-          />
-          <Tab
-            label='Permissions'
-            onClick={this.navigateTo('/permissions')}
-            classes={{
-              root: `${classes.tab}`,
-              labelContainer: classes.tabLabelContainer,
-            }}
-          />
-          <Tab
-            label='Search'
-            onClick={this.navigateTo('/search')}
+            label='Core Application'
+            onClick={this.navigateTo('/application')}
             classes={{
               root: `${classes.tab}`,
               labelContainer: classes.tabLabelContainer,
             }}
           />
         </Toolbar>
-        <Tab
-          label='Core Application'
-          onClick={this.navigateTo('/application')}
-          classes={{
-            root: `${classes.tab}`,
-            labelContainer: classes.tabLabelContainer,
-          }}
-        />
       </AppBar>
     );
   }
